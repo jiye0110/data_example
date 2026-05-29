@@ -92,6 +92,9 @@ if not os.path.exists(data_path):
 df = load_data(data_path)
 total = len(df)
 my_row = df[df['대학명'] == HIGHLIGHT_UNIV].iloc[0]
+avg_fwci = df['FWCI'].mean()
+avg_pub = df['Publications'].mean()
+avg_cit = df['Citations'].mean()
 
 # ── 사이드바 ──────────────────────────────────────────
 with st.sidebar:
@@ -204,8 +207,6 @@ elif page == "🔍 심층 분석":
         hovertemplate='<b>%{text}</b><br>Publications: %{x:,}<br>FWCI: %{y:.3f}<extra></extra>',
         name=HIGHLIGHT_UNIV
     ))
-    avg_pub = df['Publications'].mean()
-    avg_fwci = df['FWCI'].mean()
     fig_scatter.add_hline(y=avg_fwci, line_dash='dash', line_color='#CBD5E1',
                           annotation_text=f'FWCI 평균({avg_fwci:.3f})',
                           annotation_font=dict(size=10, color='#718096'))
